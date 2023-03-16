@@ -1,5 +1,5 @@
-from Book import Book
 from Author import Author
+from Book import Book
 
 def main():
     try:
@@ -33,15 +33,14 @@ def main():
         print("\nYou probably typed a letter wwhere a number is expected. Try again...")
         main()
 
-#------------------------------Authors----------------------------
-
-authorsArr = []
-
-def getAuthorId():
+def getId():
     #To be used at update and delete
-    print("\n Type the author's id to proceed: ")
+    print("\n Type the id to proceed: ")
     id = int(input())
     return id
+
+#------------------------------Authors----------------------------
+authorsArr = []
 
 def createAuthor():
     print("\nType the author's id: ")
@@ -55,13 +54,14 @@ def createAuthor():
     main()
     
 def listAuthors():
+    print('\n')
     for author in authorsArr:
         print("Author's id:", author.authorId, " Author's name:", author.authorName)
     
     main()
 
 def updateAuthor():
-    id = getAuthorId()
+    id = getId()
 
     for author in authorsArr:
         if author.authorId == id:
@@ -79,7 +79,7 @@ def updateAuthor():
     main()
 
 def deleteAuthor():
-    id = getAuthorId()
+    id = getId()
 
     for author in authorsArr:
         if author.authorId == id:
@@ -93,12 +93,65 @@ def deleteAuthor():
 booksArr = []
 
 def createBook():
-    return ''
+    print("Type the book's id: ")
+    bookId = int(input())
+
+    print("Type the book's name: ")
+    bookName = input()
+
+    print("Type the author's Id: ")
+    authorId = int(input())
+
+    for author in authorsArr:
+        if author.authorId == authorId:
+            booksArr.append(Book(bookId, bookName, author.authorId, author.authorName))
+
+    main()
+
+
 def listBooks():
-    return ''
+    print('\n')
+    for book in booksArr:
+        print("Book id: ", book.bookId, " Book name: ", book.bookName, " Author id: ", book.authorId, " Author name: ", book.authorName)
+
+    main()
+
 def updateBook():
-    return ''
+    id = getId()
+
+    print("What to change? \n 1) Book id \n 2) Book name \n 3) Book author")
+    operation = int(input())
+
+    print("Type the new value: ")
+    newValue = input()
+#
+    if type(operation) == int and operation > 0 and operation < 4:
+        for book in booksArr:
+            if book.bookId == id:
+                if operation == 1:
+                    book.bookId = int(newValue)
+                elif operation == 2:
+                    book.bookName = newValue
+                elif operation == 3: 
+                    for author in authorsArr:
+                        if author.authorId == int(newValue):
+                            book.authorId = author.authorId
+                            book.authorName = author.authorName
+
+    else:
+        print("Choose a valid option...")
+        updateBook()
+
+    main()
+
+
 def deleteBook():
-    return ''
+    id = getId()
+
+    for book in booksArr:
+        if book.bookId == id:
+            booksArr.remove(book)
+
+    main()
 
 main()

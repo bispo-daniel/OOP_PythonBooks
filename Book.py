@@ -1,7 +1,6 @@
-from Author import Author
-
 class Book:
-    def __init__(self, bookId, bookName, author):
+    def __init__(self, bookId, bookName, authorId, authorName):
         self.bookId = bookId
         self.bookName = bookName
-        self.author = Author
+        self.authorId = authorId
+        self.authorName = authorName
