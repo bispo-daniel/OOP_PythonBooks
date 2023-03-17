@@ -50,13 +50,14 @@ def createAuthor():
     authorName = input()
 
     authorsArr.append(Author(authorId, authorName))
+    print("Author successfully created!")
 
     main()
     
 def listAuthors():
-    print('\n')
+    print('\nAuthors: ')
     for author in authorsArr:
-        print("Author's id:", author.authorId, " Author's name:", author.authorName)
+        print(f"  Author's id: {author.authorId} Author's name: {author.authorName}")
     
     main()
 
@@ -73,8 +74,10 @@ def updateAuthor():
 
             if toUpdate == 1:
                 author.authorId = int(newValue)
+                print("Author's id successfully updated!")
             elif toUpdate == 2:
                 author.authorName = newValue
+                print("Author's name successfully updated!")
 
     main()
 
@@ -105,14 +108,15 @@ def createBook():
     for author in authorsArr:
         if author.authorId == authorId:
             booksArr.append(Book(bookId, bookName, author.authorId, author.authorName))
+            print("Book created!")
 
     main()
 
 
 def listBooks():
-    print('\n')
+    print('\nBooks:')
     for book in booksArr:
-        print("Book id: ", book.bookId, " Book name: ", book.bookName, " Author id: ", book.authorId, " Author name: ", book.authorName)
+        print(f"  Book id: {book.bookId} Book name: {book.bookName} Author id: {book.authorId} Author name: {book.authorName}")
 
     main()
 
@@ -137,10 +141,10 @@ def updateBook():
                         if author.authorId == int(newValue):
                             book.authorId = author.authorId
                             book.authorName = author.authorName
+                print("\nBook has been updated!")
 
     else:
-        print("Choose a valid option...")
-        updateBook()
+        print("\nChoose a valid option next time...")
 
     main()
 
@@ -151,6 +155,7 @@ def deleteBook():
     for book in booksArr:
         if book.bookId == id:
             booksArr.remove(book)
+            print("Book removed!")
 
     main()
 
